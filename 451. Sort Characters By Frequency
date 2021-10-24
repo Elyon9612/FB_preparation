@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int> table;
+        for(auto a:s){
+            table[a] ++;
+        }
+        
+        priority_queue<pair<int,char>> heap;
+        string result = "";
+        
+        for(auto [a,frq]:table)
+            heap.push({frq,a});
+        
+        while(!heap.empty()){
+            pair<int,char> cur = heap.top();
+            heap.pop();
+            result += string(cur.first,cur.second);
+        }
+        return result;
+    }
+};
