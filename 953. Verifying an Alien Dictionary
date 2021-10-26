@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        for(int i=0;i<words.size()-1;i++){
+            int l = 0, r = 0;
+            string s1 = words[i];
+            string s2 = words[i+1];
+            
+            while(s1[l] == s2[r] && (s1[l] || s2[r])){
+                l ++;
+                r ++;
+            }
+            int a = order.find(s1[l]);
+            int b = order.find(s2[r]);
+            if(a > b) return false;
+        }
+        return true;
+    }
+};
+
+// This is the method using search from the string using:   s.find([char]) -> return the position number
