@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool validPalindrome(string s) {
+        return helper(s,0,s.length()-1,0);
+    }
+private:
+    // pass by reference can lower the running space
+    bool helper(string& s, int l,int r, int index){
+        // base case:
+        if(l >= r)
+            return true;
+        if(l>s.length()-1 || r<0)
+            return false;
+        
+        // recursive part:
+        if(s[l] == s[r]){
+            return helper(s,l+1,r-1,index);
+        }else{
+            if(index == 1)
+                return false;
+            else
+                return helper(s,l+1,r,index+1) || helper(s,l,r-1,index+1);
+        }
+        
+        return false;
+    }
+};

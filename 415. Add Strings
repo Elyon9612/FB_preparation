@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        string result;
+        int l = num1.length()-1;
+        int r = num2.length()-1;
+        int index = 0;
+        while(l>=0 || r>=0){
+            int a = l>=0 ? num1[l] - '0' : 0;
+            int b = r>=0 ? num2[r] - '0' : 0;
+            
+            int tmp = a + b + index;
+            index = tmp / 10;
+            tmp %= 10;
+            // cout << a << " " << b << " " << tmp << endl;
+            result += to_string(tmp);
+            l --;
+            r --;
+        }
+        if(index != 0){
+            result += to_string(index);
+        }
+        reverse(result.begin(),result.end());
+        return result;
+    }
+};
