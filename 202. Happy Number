@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isHappy(int n) {
+        if(n < 0)
+            return false;
+        set<int> table;
+        
+        while(n != 1){
+            if(table.find(n) != table.end())
+                return false;
+            table.insert(n);
+            int tmp = n;
+            n = 0;
+            while(tmp != 0){
+                int tmp2 = tmp%10;
+                tmp /= 10;
+                n += tmp2*tmp2;
+            }
+        }
+        return true;
+    }
+};

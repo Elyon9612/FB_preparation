@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        // Because there is only three different numbers so we could use two pointers rather than typically merge or quick sort
+        int l = 0, r = nums.size()-1;
+        int cur = 0;
+        while(cur <= r){
+            if(nums[cur] == 2){
+                swap(nums[cur],nums[r]);
+                r --;
+            }else if(nums[cur] == 0){
+                swap(nums[cur],nums[l]);
+                l ++;
+                cur ++;
+            }else{
+                cur ++;
+            }
+        }
+    }
+};
