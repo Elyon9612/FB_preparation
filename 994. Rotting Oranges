@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int result = -1;
+        queue<pair<int,int>> q;
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                if(grid[i][j] == 2)
+                    q.push({i,j});
+            }
+        }
+        while(!q.empty()){
+            int n = q.size();
+            result ++;
+            for(int a = 0;a<n;a++){
+                pair<int,int> cur = q.front();
+                q.pop();
+                int i = cur.first;
+                int j = cur.second;
+                // cout << i << ' ' << j;
+                for(int a = 0;a<4;a++){
+                    int x = i + row[a];
+                    int y = j + col[a];
+                    if(x<0 || y<0 || x>=grid.size() || y>=grid[0].size() || grid[x][y] !=1){
+                        continue;
+                    }
+                    grid[x][y] = 2;
+                    q.push({x,y});
+                }
+            }
+            // cout << endl;
+        }
+        // This is checking if there still has fresh oranges
+        if(check(grid))
+            return -1;
+        return result == -1? 0:result;
+    }
+private:
+    int row[4] = {0,0,1,-1};
+    int col[4] = {1,-1,0,0};
+    bool check(vector<vector<int>> grid){
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                if(grid[i][j] == 1)
+                    return true;
+            }
+        }
+        return false;
+    }
+};
