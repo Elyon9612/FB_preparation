@@ -1,0 +1,31 @@
+// Bad approach--------------------------------------------------
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        // try to use two pointers both from the first node
+        // Not work since this didn't concern the negative numbers
+        
+        int l=0,r=0;
+        int result = 0;
+        if(nums.size() == 1)
+            return nums[0] == k? 1:0;
+        if(nums[0] == k)
+            return 1;
+        int tmp = nums[l];
+        while(r < nums.size()){
+            if(tmp == k){
+                result += 1;
+                tmp -= nums[l++];
+                cout << l-1 << " " << r << endl;
+            }  
+            if(tmp < k){
+                tmp += nums[++r];
+            }
+            if(tmp > k)
+            {
+                tmp -= nums[l++];
+            }   
+        }
+        return result;
+    }
+};
