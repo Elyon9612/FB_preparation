@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool hasGroupsSizeX(vector<int>& deck) {
+        unordered_map<int,int> table;
+        for(auto a:deck){
+            table[a] ++;
+        }
+        int tmp = table[deck[0]];
+        for(auto a:table){
+            // gcd 最大公约数
+            tmp = gcd(a.second,tmp);
+        }
+        if(tmp == 1)
+            return false;
+        return true;
+    }
+};
