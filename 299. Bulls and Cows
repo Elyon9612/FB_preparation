@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        unordered_map<char,int> table;
+        for(auto a:secret)
+            table[a] ++;
+        int A=0,B=0;
+        for(int i=0;i<secret.size();i++){
+            if(secret[i] == guess[i]){
+                A ++;
+                if(table[secret[i]] == 0){
+                    B --;
+                    table[secret[i]] ++;
+                }
+                    
+                table[secret[i]] --;
+                
+            }else if(table[guess[i]] != 0){
+                B ++;
+                table[guess[i]] --;
+            }
+        }
+        string result = "";
+        result += to_string(A) + "A" + to_string(B) + "B";
+        return result;
+    }
+};
