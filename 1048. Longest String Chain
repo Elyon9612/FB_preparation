@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int longestStrChain(vector<string>& words) {
+        // Sort the words array
+        sort(words.begin(),words.end(), [](string &word1,string &word2){
+            return word1.length() < word2.length();
+        });
+        
+        // Create hashtable [words:key, length:value]
+        unordered_map<string,int> dp;
+        int result = 1;
+        
+        // iterate through the words array
+        for(auto word:words){
+            int curlength = 1;
+            // Main part:
+            // Find all possible predecessors from the hashtable by removing each char of the current word
+            for(int i=0;i<word.length();i++){
+                string predec = word.substr(0,i) + word.substr(i+1,word.length()+1);
+                if(dp.find(predec) != dp.end()){
+                    int prelength = dp[predec];
+                    curlength = max(prelength+1,curlength);
+                }
+            }
+            dp[word] = curlength;
+            result = max(result,curlength);
+        }
+        
+        return result;
+    }
+};
