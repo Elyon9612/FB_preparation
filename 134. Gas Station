@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int index = 0;
+        int result = INT_MAX;
+        
+        int total = 0;
+        
+        for (int i=0;i<gas.size();i++){
+            total += (gas[i] - cost[i]);
+            
+            if(total < result){
+                index = i;
+                result = total;
+            }
+        }
+        
+        if(total < 0)   return -1;
+        cout << index << endl;
+        return (index + 1) % gas.size();
+    }
+};
